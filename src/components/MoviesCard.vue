@@ -23,6 +23,22 @@
 
 </template>
 
-<style scoped>
+<script>
+import {getBooks} from "@/services/moviesFunctions";
+export default {
+  data(){
+    return{
+      books: [],
 
-</style>
+    }
+  },
+  mounted(){
+    this.getBooks();
+  },
+  methods:{
+    async getBooks(){
+      this.books = await getBooks();
+    }
+  }
+}
+</script>

@@ -20,9 +20,9 @@ import Register from "@/components/Register.vue";
              </b-button>
            </div>
             <div class="col">
-              <b-button v-on:click="nombreFind">
+              <b-button v-on:click="publicationFind">
                 <b-icon icon="filter" aria-hidden="true"></b-icon>
-                Filtrar por nombre
+                Filtrar por fecha de publicacion
               </b-button>
             </div>
             <div class="col">
@@ -65,8 +65,8 @@ export default {
     autorFind(){
       console.log("autorFind")
     },
-    nombreFind(){
-      console.log("nombreFind")
+    publicationFind(){
+      console.log("PublicationFind")
     },
     imagenFind(){
       console.log("imagenFind")
