@@ -1,5 +1,4 @@
-<script setup lang="ts">
-import TheWelcome from '@/components/TheWelcome.vue'
+<script setup >
 import MoviesCard from "@/components/MoviesCard.vue";
 import Carousel from "@/components/Carousel.vue";
 import Register from "@/components/Register.vue";
@@ -8,11 +7,31 @@ import Register from "@/components/Register.vue";
 <template>
   <main>
     <div class="container-fluid">
-      <div class="row">
+      <div class="row" v-show="showCarousel">
         <Carousel/>
       </div>
       <div class="row">
         <div class="col-10">
+          <div class="row">
+           <div class="col">
+             <b-button v-on:click="autorFind">
+               <b-icon icon="filter" aria-hidden="true"></b-icon>
+               Filtrar por autor
+             </b-button>
+           </div>
+            <div class="col">
+              <b-button v-on:click="nombreFind">
+                <b-icon icon="filter" aria-hidden="true"></b-icon>
+                Filtrar por nombre
+              </b-button>
+            </div>
+            <div class="col">
+              <b-button v-on:click="imagenFind">
+                <b-icon icon="filter" aria-hidden="true"></b-icon>
+                Tiene imagen
+              </b-button>
+            </div>
+          </div>
           <MoviesCard/>
         </div>
         <div class="col-2">
@@ -34,3 +53,24 @@ import Register from "@/components/Register.vue";
     </div>
   </main>
 </template>
+
+<script>
+export default {
+  data(){
+    return{
+      showCarousel: true
+    }
+  },
+  methods:{
+    autorFind(){
+      console.log("autorFind")
+    },
+    nombreFind(){
+      console.log("nombreFind")
+    },
+    imagenFind(){
+      console.log("imagenFind")
+    }
+  }
+}
+</script>
