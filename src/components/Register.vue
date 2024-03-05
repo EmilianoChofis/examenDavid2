@@ -115,6 +115,8 @@ export default {
       }
       try {
         const response = await saveBook(this.form);
+        this.$bvModal.hide('modal-prevent-closing')
+        this.$v?.$reset();
       }catch (e){
         console.log(e);
       }
