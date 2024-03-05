@@ -23,8 +23,10 @@ export const saveBook = async (book) => {
 }
 
 export const deleteBook = async (id) => {
+    console.log(id )
+    id = {id: id}
     try {
-        const response = await axios.put(API_URL+'/books/status');
+        const response = await axios.put(API_URL+'/books/status', id);
         console.log(response.data)
         return response.data;
     }catch (error){

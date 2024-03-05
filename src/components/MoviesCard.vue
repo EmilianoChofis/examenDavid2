@@ -5,25 +5,24 @@
 <template>
   <div>
 
-      <draggable v-model="books" :options="dragOptions" @start="onDragStart" @end="onDragEnd">
-        <b-row>
-        <b-col  v-for="book in books" :key="book.id" @dragstart="handleDragStart(book)"
-               @dragend="handleDragEnd"
-               draggable="true"
-        >
+      <draggable v-for="book in books" :key="book.id" v-model="books" :options="dragOptions" @start="onDragStart" @end="onDragEnd(book)">
+
+        <b-col   >
           <b-card
               :class="{shake:disabled}"
-              title="Card Title"
               img-src="https://picsum.photos/600/300/?image=25"
               img-alt="Image"
               img-top
               tag="article"
               style="max-width: 20rem;"
               class="mb-2"
-
+              :border-variant="
+						book.status === true ? 'success' : 'danger'
+					"
 
           >
             <b-card-text>
+              <br>
               {{ book.name }}
               <br>
               {{ book.author }}
@@ -32,7 +31,7 @@
             </b-card-text>
           </b-card>
         </b-col>
-        </b-row>
+
       </draggable>
 
 
@@ -41,7 +40,7 @@
 </template>
 
 <script>
-import {getBooks} from "@/services/moviesFunctions";
+import {deleteBook, getBooks} from "@/services/moviesFunctions";
 import draggable from "vuedraggable";
 export default {
   components: {
@@ -54,7 +53,8 @@ export default {
       disabled: false,
       dragOptions: {
         animation: 150
-      }
+      },
+      bookId: ""
 
     }
   },
@@ -66,8 +66,11 @@ export default {
     onDragStart(event) {
       console.log('Drag start:', event);
     },
-    onDragEnd(event) {
-      console.log('Drag end:', event);
+    onDragEnd(book) {
+      const response = deleteBook(book.id);
+      //recargar pagina
+      this.getBooks();
+
     },
     async getBooks(){
       this.books = await getBooks();
@@ -77,13 +80,6 @@ export default {
       setTimeout(() => {
         this.disabled = false;
       }, 3000);
-    },
-    handleDragStart(book) {
-
-    },
-    handleDragEnd() {
-      // Manejar el final del arrastre
-      this.draggedBook = null;
     }
   }
 }
