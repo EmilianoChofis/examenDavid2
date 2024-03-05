@@ -2,6 +2,8 @@
 import MoviesCard from "@/components/MoviesCard.vue";
 import Carousel from "@/components/Carousel.vue";
 import Register from "@/components/Register.vue";
+import Dropzone from "@/components/Dropzone.vue";
+import DropzoneDelete from "@/components/DropzoneDelete.vue";
 </script>
 
 <template>
@@ -46,6 +48,12 @@ import Register from "@/components/Register.vue";
             <Register/>
           </div>
           <div class="row">
+            <div class="row">
+              <Dropzone/>
+            </div>
+            <div class="row">
+              <DropzoneDelete/>
+            </div>
 <!--dropzone de update            -->
           </div>
         </div>
@@ -55,6 +63,7 @@ import Register from "@/components/Register.vue";
 </template>
 
 <script>
+
 export default {
   data(){
     return{

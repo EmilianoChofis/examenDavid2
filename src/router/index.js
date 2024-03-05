@@ -14,7 +14,7 @@ const router = new VueRouter({
       component: HomeView
     },
     {
-      path: '/about',
+      path: '/prueba',
       name: 'about',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route

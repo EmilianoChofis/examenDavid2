@@ -4,28 +4,37 @@
 
 <template>
   <div>
-    <b-row>
-      <b-col v-for="book in books" :key="book.id">
-        <b-card
-            :class="{shake:disabled}"
-            title="Card Title"
-            img-src="https://picsum.photos/600/300/?image=25"
-            img-alt="Image"
-            img-top
-            tag="article"
-            style="max-width: 20rem;"
-            class="mb-2"
+
+      <draggable v-model="books" :options="dragOptions" @start="onDragStart" @end="onDragEnd">
+        <b-row>
+        <b-col  v-for="book in books" :key="book.id" @dragstart="handleDragStart(book)"
+               @dragend="handleDragEnd"
+               draggable="true"
         >
-          <b-card-text>
-            {{ book.name }}
-            <br>
-            {{ book.author }}
-            <br>
-            {{ book.publicationDate }}
-          </b-card-text>
-        </b-card>
-      </b-col>
-    </b-row>
+          <b-card
+              :class="{shake:disabled}"
+              title="Card Title"
+              img-src="https://picsum.photos/600/300/?image=25"
+              img-alt="Image"
+              img-top
+              tag="article"
+              style="max-width: 20rem;"
+              class="mb-2"
+
+
+          >
+            <b-card-text>
+              {{ book.name }}
+              <br>
+              {{ book.author }}
+              <br>
+              {{ book.publicationDate }}
+            </b-card-text>
+          </b-card>
+        </b-col>
+        </b-row>
+      </draggable>
+
 
   </div>
 
@@ -33,11 +42,19 @@
 
 <script>
 import {getBooks} from "@/services/moviesFunctions";
+import draggable from "vuedraggable";
 export default {
+  components: {
+    draggable
+  },
+
   data(){
     return{
       books: [],
-      disabled: false
+      disabled: false,
+      dragOptions: {
+        animation: 150
+      }
 
     }
   },
@@ -46,15 +63,27 @@ export default {
     this.warnDisabled();
   },
   methods:{
+    onDragStart(event) {
+      console.log('Drag start:', event);
+    },
+    onDragEnd(event) {
+      console.log('Drag end:', event);
+    },
     async getBooks(){
       this.books = await getBooks();
-      this.books.publicationDate = new Date(this.books.publicationDate).toISOString().split('T')[0];
     },
     warnDisabled(){
       this.disabled = true;
       setTimeout(() => {
         this.disabled = false;
       }, 3000);
+    },
+    handleDragStart(book) {
+
+    },
+    handleDragEnd() {
+      // Manejar el final del arrastre
+      this.draggedBook = null;
     }
   }
 }
@@ -78,4 +107,5 @@ export default {
       transform: translate3d(4px, 0, 0);
     }
   }
+
 </style>
