@@ -14,26 +14,7 @@ import DropzoneDelete from "@/components/DropzoneDelete.vue";
       </div>
       <div class="row">
         <div class="col-10">
-          <div class="row mt-4">
-           <div class="col">
-             <b-button v-on:click="autorFind">
-               <b-icon icon="filter" aria-hidden="true"></b-icon>
-               Filtrar por autor
-             </b-button>
-           </div>
-            <div class="col">
-              <b-button v-on:click="publicationFind">
-                <b-icon icon="filter" aria-hidden="true"></b-icon>
-                Filtrar por fecha de publicacion
-              </b-button>
-            </div>
-            <div class="col">
-              <b-button v-on:click="imagenFind">
-                <b-icon icon="filter" aria-hidden="true"></b-icon>
-                Tiene imagen
-              </b-button>
-            </div>
-          </div>
+
           <MoviesCard/>
         </div>
         <div class="col-2 mt-2">
@@ -54,7 +35,6 @@ import DropzoneDelete from "@/components/DropzoneDelete.vue";
             <div class="row">
               <DropzoneDelete/>
             </div>
-<!--dropzone de update            -->
           </div>
         </div>
       </div>
@@ -64,6 +44,8 @@ import DropzoneDelete from "@/components/DropzoneDelete.vue";
 
 <script>
 
+import {orderByAuthor} from "@/services/moviesFunctions";
+
 export default {
   data(){
     return{
@@ -71,15 +53,7 @@ export default {
     }
   },
   methods:{
-    autorFind(){
-      console.log("autorFind")
-    },
-    publicationFind(){
-      console.log("PublicationFind")
-    },
-    imagenFind(){
-      console.log("imagenFind")
-    }
+
   }
 }
 </script>

@@ -37,21 +37,30 @@ export const deleteBook = async (id) => {
 export const orderByAuthor = async () => {
     try {
         const response = await axios.get(API_URL+'/books/order/author');
-        console.log(response.data)
-        return response.data;
+        console.log(response.data.result)
+        return response.data.result;
     }catch (error){
         console.error(error);
     }
 }
 
-export const orderByName = async () => {
+export const orderByPublication = async () => {
     try {
         const response = await axios.get(API_URL+'/books/order/publicationDate');
-        console.log(response.data)
-        return response.data;
+        return response.data.result;
     }catch (error){
         console.error(error);
     }
+}
+
+export const orderByImage = async () => {
+    try {
+        const response = await axios.get(API_URL+'/books/filter/image');
+        return response.data.result;
+    }catch (error){
+        console.error(error);
+    }
+
 }
 
 const changeDateFormat =(fecha)=>{

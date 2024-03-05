@@ -4,7 +4,26 @@
 
 <template>
   <div>
-
+    <div class="row mt-4">
+      <div class="col">
+        <b-button v-on:click="autorFind">
+          <b-icon icon="filter" aria-hidden="true"></b-icon>
+          Filtrar por autor
+        </b-button>
+      </div>
+      <div class="col">
+        <b-button v-on:click="publicationFind">
+          <b-icon icon="filter" aria-hidden="true"></b-icon>
+          Filtrar por fecha de publicacion
+        </b-button>
+      </div>
+      <div class="col">
+        <b-button v-on:click="imagenFind">
+          <b-icon icon="filter" aria-hidden="true"></b-icon>
+          Tiene imagen
+        </b-button>
+      </div>
+    </div>
       <draggable v-for="book in books" :key="book.id" v-model="books" :options="dragOptions" @start="onDragStart" @end="onDragEnd(book)">
 
         <b-col   >
@@ -40,7 +59,7 @@
 </template>
 
 <script>
-import {deleteBook, getBooks} from "@/services/moviesFunctions";
+import {deleteBook, getBooks, orderByAuthor, orderByImage, orderByPublication} from "@/services/moviesFunctions";
 import draggable from "vuedraggable";
 export default {
   components: {
@@ -80,6 +99,15 @@ export default {
       setTimeout(() => {
         this.disabled = false;
       }, 3000);
+    },
+    async autorFind(){
+      this.books = await orderByAuthor();
+    },
+    async publicationFind(){
+      this.books = await orderByPublication();
+    },
+    async imagenFind(){
+      this.books = await orderByImage();
     }
   }
 }
