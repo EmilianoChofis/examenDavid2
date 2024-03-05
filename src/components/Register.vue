@@ -41,6 +41,13 @@
           required
           ></b-form-input>
         </b-form-group>
+        <b-form-group label="Cover Image" label-for="coverImage-input">
+          <b-form-input
+          id="coverImage-input"
+          v-model="form.coverImage"
+          required
+          ></b-form-input>
+        </b-form-group>
         <b-form-group
             id="publicationDate"
             label="Publication Date"
@@ -58,13 +65,16 @@
 </template>
 
 <script>
+import {saveBook} from "@/services/moviesFunctions";
+
 export default {
   data() {
     return {
       form: {
         name: "",
         author: "",
-        publicationDate: ""
+        publicationDate: "",
+        coverImage:""
       },
       errors: []
     }
@@ -82,11 +92,16 @@ export default {
         this.errors.push("Publication Date is required.");
       }
 
+      if (!this.form.coverImage) {
+        this.errors.push("Cover Image is required.");
+      }
+
     },
     resetModal(){
       this.form.name = "";
       this.form.author = "";
       this.form.publicationDate = "";
+      this.form.coverImage = "";
       this.errors = [];
     },
     handleOk(bvModalEvent) {
@@ -99,7 +114,7 @@ export default {
         return
       }
       try {
-        console.log("not ready yet")
+        const response = await saveBook(this.form);
       }catch (e){
         console.log(e);
       }

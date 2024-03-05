@@ -12,7 +12,7 @@ import Register from "@/components/Register.vue";
       </div>
       <div class="row">
         <div class="col-10">
-          <div class="row">
+          <div class="row mt-4">
            <div class="col">
              <b-button v-on:click="autorFind">
                <b-icon icon="filter" aria-hidden="true"></b-icon>
@@ -34,7 +34,7 @@ import Register from "@/components/Register.vue";
           </div>
           <MoviesCard/>
         </div>
-        <div class="col-2">
+        <div class="col-2 mt-2">
           <div class="row">
             <b-button
                 v-b-modal.modal-prevent-closing

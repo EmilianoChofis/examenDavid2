@@ -5,7 +5,6 @@ const API_URL = 'http://localhost:8080/api';
 export const getBooks = async () => {
     try {
         const response = await axios.get(API_URL+'/books');
-        console.log(response.data.result)
         return response.data.result;
     }catch (error){
         console.error(error);
@@ -13,6 +12,7 @@ export const getBooks = async () => {
 }
 
 export const saveBook = async (book) => {
+    book.publicationDate = changeDateFormat(book.publicationDate);
     try {
         const response = await axios.post(API_URL+'/books', book);
         console.log(response.data)
@@ -50,4 +50,10 @@ export const orderByName = async () => {
     }catch (error){
         console.error(error);
     }
+}
+
+const changeDateFormat =(fecha)=>{
+    //reemplaza - por / para que la fecha sea reconocida por el navegador
+    fecha = fecha.replace(/-/g, '/');
+    return fecha;
 }
