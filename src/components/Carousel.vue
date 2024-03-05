@@ -17,10 +17,9 @@
         @sliding-start="onSlideStart"
         @sliding-end="onSlideEnd"
     >
-      <!-- Text slides with image -->
       <b-carousel-slide
-          caption="First slide"
-          text="Nulla vitae elit libero, a pharetra augue mollis interdum."
+          v-for="book in books" :key="book.id"
+          :caption="book.name"
           img-src="https://picsum.photos/1024/480/?image=52"
       ></b-carousel-slide>
     </b-carousel>
@@ -28,12 +27,17 @@
 </template>
 
 <script>
+import {getBooks} from "@/services/moviesFunctions";
+
 export default {
   data() {
     return {
       slide: 0,
-      sliding: null
+      sliding: null,
+      books: [],
     }
+  },mounted() {
+    this.getBooks();
   },
   methods: {
     onSlideStart(slide) {
@@ -41,6 +45,9 @@ export default {
     },
     onSlideEnd(slide) {
       this.sliding = false
+    },
+    async getBooks(){
+      this.books = await getBooks();
     }
   }
 }
